@@ -1,8 +1,8 @@
 # Spring2024Capstone
 Repository for Spring Capstone project
 
-**Home Credit Default Risk Analysis** </br>
-This repository contains a combination of both R (.rmd) and Python (.ipynb) files, Exploratory Data Analysis done in R and Modelling done in python to explore both R and Python for this project.
+# **Home Credit Default Risk Analysis** </br>
+This repository contains a combination of both R (.rmd) and Python (.ipynb) files, Exploratory Data Analysis done in R and Modelling done in python to explore both R and Python for for this data set.
  
 # **Table of Contents**
 ### [Summary of business problem and project objective](#summary-of-business-problem-and-project-objective) </br>
@@ -28,6 +28,14 @@ The analytics approach encompasses leveraging statistical and machine learning t
 This project will be a success if the people who can repay the loan are offered the loan based on our prediction model. This will help in not rejecting good candidates with repayment capacity. As noted, this project is focused on prediction. Therefore, we will not be including any analysis of why customers are failing to repay the loan. That analysis is out of scope for the current project.
 
 ### Process and solution
+To run the .rmd file the following libraries are required to be installed : </br>
+dplyr, readr, tidyverse, ggplot2 </br>
+To run the .ipynb file the following libraries are required to be installed through either 'conda intall library name' or 'pip intall library name' : </br>
+warnings, numpy, pandas, matplotlib.pyplot, seaborn, sklearn.model_selection, sklearn.preprocessing, xgboost, sklearn.model_selection, sklearn.linear_model, sklearn.ensemble </br>
+
+
+
+
 
 
 
