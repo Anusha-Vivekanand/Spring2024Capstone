@@ -1,7 +1,7 @@
 # Spring2024Capstone
 Repository for Spring Capstone project
 
-**Home Credit Default Risk Analysis** 
+**Home Credit Default Risk Analysis** </br>
 This repository contains a combination of both R (.rmd) and Python (.ipynb) files, Exploratory Data Analysis done in R and Modelling done in python to explore both R and Python for this project.
  
 # **Table of Contents**
