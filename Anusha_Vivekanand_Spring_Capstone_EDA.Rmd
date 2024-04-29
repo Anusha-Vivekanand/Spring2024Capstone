@@ -1,0 +1,273 @@
+---
+title: "AnushaVivekanand_EDA_Capstone"
+author: "Anusha_Vivekanand"
+date: "2024-02-17"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    fig_width: 15
+    fig_height: 10
+    highlight: tango
+    df_print: paged
+  pdf_document:
+    toc: yes
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+```
+
+```{r Install packages}
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+install.packages("GGally")
+```
+
+# Introduction
+> Unbanked individuals constitute an underserved demographic and a largely untapped market for reputable creditors. Home Credit endeavors to address this gap in service. However, establishing creditworthiness among a population devoid of significant financial history, verifiable assets, or conventional eligibility criteria poses distinctive challenges.
+
+
+## Project Scope
+
+> This project aims to leverage machine learning algorithms to construct a classification model, utilizing available data pertaining to Home Credit customers. The primary objective is to enhance the accuracy of predicting customers likely to repay loans issued by Home Credit. The team intends to evaluate various classification models to ascertain the most effective one, utilizing data beyond the training set for validation. Furthermore, this endeavor offers the potential to uncover additional data that could enhance the classification model's performance.
+
+> A successful model is expected to outperform simple prediction methods based on majority class statistics. This enhanced predictive capability will empower Home Credit to extend loans to customers with confidence, thereby increasing the company's assets and advancing its mission of providing credit to underserved populations.
+
+> The subsequent exploration delves into the dataset, providing preliminary analysis to assess its suitability for further data modeling endeavors.
+
+
+## Load Packages and install libraries
+
+```{r message=FALSE, warning=FALSE}
+# Load packages
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+#install.packages("skimr")
+library(skimr)
+library(GGally)
+```
+
+## Read csv data
+
+```{r message=FALSE, warning=FALSE}
+CreditCardBalance <- read_csv("credit_card_balance.csv")
+Bureau <- read_csv("bureau.csv")
+BureauBalance <- read_csv("bureau_balance.csv")
+HomeCreditColumnDesc <- read_csv("HomeCredit_columns_description.csv")
+TrainApplication <- read_csv("application_train.csv")
+
+```
+
+# Description of Data
+## Find glimpse of data
+
+```{r message=FALSE, warning=FALSE}
+glimpse(TrainApplication)
+```
+
+
+### Skim through the data
+
+```{r message=FALSE, warning=FALSE}
+skim(TrainApplication) # view stats of the data using skim
+```
+
+
+### Summary of the data
+
+```{r message=FALSE, warning=FALSE}
+summary(TrainApplication) #show summary for the subset data
+```
+
+```{r message=FALSE, warning=FALSE}
+head(TrainApplication)# view first 5 rows of data
+```
+
+# Target Value Analysis
+## Majority class
+
+```{r message=FALSE, warning=FALSE}
+# Majority class to see whether customers have difficulty in repayment or not
+round(mean(TrainApplication$TARGET),digits = 2) #rounding off to 2 decimal places
+round((1 - mean(TrainApplication$TARGET)) *100,digits = 2) #Train application data mean after rounding off to 2 decimal places
+```
+
+The predominant class consists of customers who do not encounter difficulty in repaying the loans. This inference is drawn by subtracting the percentage of customers facing difficulties (0.08) from 1, resulting in 0.9193 or 92%. Hence, it can be concluded that 92% of the customers do not encounter challenges in repaying loans.
+
+```{r message=FALSE, warning=FALSE}
+sum(TrainApplication$TARGET) #Verifying the majority class by taking total count of rows in column and data. By comparing we should get 0.08%
+nrow(TrainApplication)
+```
+
+```{r message=FALSE, warning=FALSE}
+head(TrainApplication$EXT_SOURCE_1)
+```
+
+```{r message=FALSE, warning=FALSE}
+HomeCreditColumnDesc$Description # go through the data description for the columns
+```
+
+## Feature engineering to convert as factor
+
+```{r message=FALSE, warning=FALSE}
+#converting to categorical variables using as.factor
+TrainApplication$TARGET <- as.factor(TrainApplication$TARGET)
+TrainApplication$CODE_GENDER <- as.factor(TrainApplication$CODE_GENDER)
+TrainApplication$FLAG_OWN_CAR <- as.factor(TrainApplication$FLAG_OWN_CAR)
+TrainApplication$FLAG_OWN_REALTY <- as.factor(TrainApplication$FLAG_OWN_REALTY)
+TrainApplication$FLAG_PHONE <- as.factor(TrainApplication$FLAG_PHONE)
+TrainApplication$FLAG_MOBIL <- as.factor(TrainApplication$FLAG_MOBIL)
+TrainApplication$FLAG_EMP_PHONE <- as.factor(TrainApplication$FLAG_EMP_PHONE)
+TrainApplication$FLAG_WORK_PHONE <- as.factor(TrainApplication$FLAG_WORK_PHONE)
+TrainApplication$FLAG_CONT_MOBILE <- as.factor(TrainApplication$FLAG_CONT_MOBILE)
+TrainApplication$FLAG_PHONE <- as.factor(TrainApplication$FLAG_PHONE)
+TrainApplication$FLAG_EMAIL <- as.factor(TrainApplication$FLAG_EMAIL)
+TrainApplication$OWN_CAR_AGE <- as.numeric(TrainApplication$OWN_CAR_AGE)
+```
+
+# Investigating N/A Values
+## Check missing value
+
+```{r message=FALSE, warning=FALSE}
+#check missing value
+sum(is.na(TrainApplication))
+```
+
+The proposed approach for handling missing values involves the following steps: 1. For missing numeric data, replace them with either the mean or median depending on the column. 2. For categorical variables, create a new category labeled "N/A" to represent values that do not fall within any of the existing categories.
+
+```{r message=FALSE, warning=FALSE}
+#check unique customer to avoid repetition on Customer data
+length(unique(TrainApplication$SK_ID_CURR))
+```
+
+```{r message=FALSE, warning=FALSE}
+# Function to calculate missing values by column in a DataFrame
+# Create a dataframe to store missing values, unique values, and data types
+TrainApplication_missing <- data.frame(
+  Missing_Values = colSums(is.na(TrainApplication)),
+  Unique_Values = sapply(TrainApplication, function(x) length(unique(x))),
+  Data_Types = sapply(TrainApplication, class)
+)
+
+# Display the dataframe
+TrainApplication_missing
+```
+
+```{r}
+## Histogram of Income
+ggplot(TrainApplication, aes(x = AMT_CREDIT, y = AMT_ANNUITY, colour = AMT_INCOME_TOTAL)) + geom_point()+ggtitle("Scatter Plot of Credit Amount vs. Annuity Amount, colored by Total Income")
+```
+
+```{r}
+
+# Get unique values in the column code_gender
+unique_NAME_CONTRACT_TYPE <- unique(TrainApplication$NAME_CONTRACT_TYPE)
+
+# Print the unique values
+print(unique_NAME_CONTRACT_TYPE)
+
+```
+
+
+```{r}
+ ggplot(data=TrainApplication, aes(x=NAME_CONTRACT_TYPE, y=(AMT_CREDIT),group=NAME_FAMILY_STATUS,
+                           fill=NAME_FAMILY_STATUS))+
+  geom_bar(stat="identity")+
+  scale_fill_brewer(palette = "Set6") +
+  xlab("Loan Type")+
+  ylab("Loan Amount")+
+  ggtitle("Loan Type VS Loan Amount for Different Family Type")
+```
+
+```{r}
+ggplot(TrainApplication, aes(x = as.factor(TARGET))) +
+  geom_bar(fill = "dark green") +
+  geom_text(stat = "count", aes(label = ..count..), vjust = -0.5, color = "black", size = 3) +
+  labs(x = "Target Variable", y = "Count") +
+  ggtitle("Distribution of the Target Variable") +
+  scale_y_continuous(breaks = seq(0, max(table(TrainApplication$TARGET)), by = 50000))
+```
+
+
+```{r}
+# Calculate the proportion and convert it to percentages
+proportion <- prop.table(table(TrainApplication$TARGET)) * 100
+
+# Create a data frame for plotting
+pie_data <- data.frame(category = names(proportion), proportion = proportion)
+
+# Create the pie chart using ggplot
+pie_chart <- ggplot(pie_data, aes(x = "", y = proportion, fill = category)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  labs(fill = "Category") +
+  geom_text(aes(label = paste0(round(proportion, 2), "%")), position = position_stack(vjust = 0.5)) +
+  labs(title = "Proportion of TARGET Categories") +
+  scale_fill_manual(values = c("darkgreen", "pink"))
+
+# Display the pie chart
+print(pie_chart)
+
+```
+## Social Circle Data
+
+Examining the remaining columns with missing values, four of them pertain to the applicant's social circle and the 30-day and 60-day past due default status. It's worth noting that there is only minimal missing data, with a total of 1021 instances.
+
+```{r social circle data}
+#install required packages
+install.packages("gridExtra")
+library(gridExtra)
+library(grid)
+# Dataframe with social variables
+social_data_df <- TrainApplication %>% select(OBS_30_CNT_SOCIAL_CIRCLE,DEF_30_CNT_SOCIAL_CIRCLE,OBS_60_CNT_SOCIAL_CIRCLE,
+                                  DEF_60_CNT_SOCIAL_CIRCLE)
+summary(social_data_df)
+
+# Create Plots
+plot_OBS_30 <- ggplot(social_data_df, aes(OBS_30_CNT_SOCIAL_CIRCLE)) +
+  geom_histogram()
+plot_DEF_30 <- ggplot(social_data_df, aes(DEF_30_CNT_SOCIAL_CIRCLE)) +
+  geom_histogram()
+plot_OBS_60 <- ggplot(social_data_df, aes(OBS_60_CNT_SOCIAL_CIRCLE)) +
+  geom_histogram()
+plot_DEF_60 <- ggplot(social_data_df, aes(DEF_60_CNT_SOCIAL_CIRCLE)) +
+  geom_histogram()
+
+grid.arrange(plot_OBS_30,plot_DEF_30,plot_OBS_60,plot_DEF_60, ncol=2, top=textGrob('Social Circle Variable Distribution'))
+```
+
+# Basic inspection of application train data
+## Scope of missing values
+### Rowwise completeness
+
+```{r}
+TrainApplication %>%
+  mutate(n_missing = rowSums(is.na(.)),
+         p_missing = n_missing/ncol(.)) %>%
+  ggplot() +
+  geom_histogram(aes(p_missing),
+                 binwidth = 0.05, fill = "darkgreen", color = "white") +
+  stat_bin(aes(p_missing, y = after_stat(count), label = ifelse(after_stat(count) == 0, "", after_stat(count))),
+           geom = "text", binwidth = 0.05, size = 4, fontface = "bold", vjust = 0) +
+  scale_x_continuous(breaks = seq(0,1,0.1), minor_breaks = NULL) +
+  scale_y_continuous(labels = ~paste0(.%/%1000, "k")) +
+  labs(title = "Distribution of missing values by row",
+       x = "percent missing") +
+  theme_minimal()
+```
+
+# Results
+
+> The dataset comprises 307,510 rows and 122 columns, inclusive of the target variable denoting payment difficulties. Among these, 24,825 clients encounter payment issues, while 282,686 clients exhibit no such concerns, reflecting an imbalance where the majority class constitutes 91.92% of clients. Notably, the target variable exhibits no missing values.
+
+> Missing values are observed across various columns, necessitating careful consideration for imputation or removal.
+
+> Furthermore, examination of credit bureau data indicates a right-skewed distribution and missing values, which can be addressed through median imputation. Additionally, the dataset presents erroneous data points and outliers, warranting corrective measures to ensure data integrity.
+
+> In summary, these insights shed light on the dataset's characteristics, encompassing the target variable, missing data, and data quality. Despite the identified challenges, the dataset offers substantial records. Even with necessary data preprocessing steps, such as removal or imputation of columns and rows, there remains ample information to justify proceeding with the dataset into the modeling phase.
+
+
