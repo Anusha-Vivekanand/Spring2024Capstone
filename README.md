@@ -18,7 +18,7 @@ This repository contains a combination of both R (.rmd) and Python (.ipynb) file
 ### Summary of business problem and project objective
 Many people struggle to get loans because they either have a short credit history or none. Unfortunately, some lenders take advantage of these individuals. Home Credit wants to help by making it easier for these people to borrow money in a safe and positive way. They use alternative data, from Telco and Transactional information, to predict if clients can repay loans using machine learning and statistical approaches. Home Credit is looking for new ideas to improve their predictions and make sure more people who can repay get approved for loans. They also want the customers who have potential to repay loans to not be rejected from being offered a home loan while providing in detail repayment calendar containing principal and maturity information of the loan so that customers are better informed.
 
-These are the benefits of the solution:
+These are the benefits of the solution: </br>
 1.Enhanced prediction accuracy ensures deserving clients who are capable of repaying are not rejected. </br>
 2.Provides a secure and positive borrowing experience while reducing the risk of exploitation by untrustworthy lenders. </br>
 3.Empowers clients with loans tailored to support their financial success.
