@@ -9,7 +9,7 @@ This repository contains a combination of both R (.rmd) and Python (.ipynb) file
 ## [Process and solution](#Process-and-solution) </br>
 ## [Team solution to the business problem](#Team-solution-to-the-business-problem) </br>
 ## [Individual contribution](#Individual-contribution) </br>
-## [Business value of the solution](#Business value of the solution)
+## [Business value of the solution](#Business-value-of-the-solution)
 ## [Challenges](#Challenges)
 ## [Learnings](#Learnings)
 
