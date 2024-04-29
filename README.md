@@ -5,13 +5,13 @@ Repository for Spring Capstone project
 This repository contains a combination of both R (.rmd) and Python (.ipynb) files, Exploratory Data Analysis done in R and Modelling done in python to explore both R and Python for this project.
  
 ## **Table of Contents**
-[Summary of business problem and project objective](#Summary-of-business-problem-and-project-objective)
-### 2. Process and solution 
-#### 2.1 Team solution to the business problem
-#### 2.2 Individual contribution 
-### 3. Business value of the solution
-### 4. Challenges 
-### 5. Learnings
+## [Summary of business problem and project objective](#Summary-of-business-problem-and-project-objective)
+## [Process and solution](#Process-and-solution) </br>
+## [Team solution to the business problem](#Team-solution-to-the-business-problem) </br>
+## [Individual contribution](#Individual-contribution) </br>
+## [Business value of the solution](#Business value of the solution)
+## [Challenges](#Challenges)
+## [Learnings](#Learnings)
 
 ## [My Heading](#my-heading)
 ## My Heading
@@ -27,5 +27,33 @@ These are the benefits of the solution:
 The analytics approach encompasses leveraging statistical and machine learning techniques, including supervised learning and classification models. Specifically, we aim to enhance Home Credit's credit scoring system by extracting insights from telco and transactional data and building a predictive model that provides a comprehensive list of customers who can repay the loan.
 
 This project will be a success if the people who can repay the loan are offered the loan based on our prediction model. This will help in not rejecting good candidates with repayment capacity. As noted, this project is focused on prediction. Therefore, we will not be including any analysis of why customers are failing to repay the loan. That analysis is out of scope for the current project.
+## Process and solution
 
 
+
+
+
+## Team solution to the business problem
+
+
+
+
+
+## Individual contribution
+
+
+
+
+
+## Business value of the solution
+
+
+
+
+## Challenges
+
+
+
+
+
+## Learning
