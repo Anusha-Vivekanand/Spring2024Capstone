@@ -6,7 +6,7 @@ This repository contains a combination of both R (.rmd) and Python (.ipynb) file
  
 # **Table of Contents**
 ### [Summary of business problem and project objective](#summary-of-business-problem-and-project-objective) </br>
-### [Process, solution , contribution and business value](#process-and-solution) </br>
+### [Process,solution,contribution and business value](#Process-solution-contribution-and-business-value) </br>
 ### [Challenges](#challenges) </br>
 ### [Learnings](#learnings)
 
@@ -24,7 +24,7 @@ The analytics approach encompasses leveraging statistical and machine learning t
 
 This project will be a success if the people who can repay the loan are offered the loan based on our prediction model. This will help in not rejecting good candidates with repayment capacity. As noted, this project is focused on prediction. Therefore, we will not be including any analysis of why customers are failing to repay the loan. That analysis is out of scope for the current project.
 
-### Process, solution , contribution and business value
+### Process,solution,contribution and business value
 To run the .rmd file the following libraries are required to be installed : </br>
 dplyr, readr, tidyverse, ggplot2 </br>
 To run the .ipynb file the following libraries are required to be installed through either 'conda intall library name' or 'pip intall library name' : </br>
