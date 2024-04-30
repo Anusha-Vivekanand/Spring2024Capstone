@@ -1,4 +1,4 @@
-# Spring2024Capstone
+# Spring 2024 Capstone
 Repository for Spring Capstone project
 
 # **Home Credit Default Risk Analysis** </br>
@@ -37,7 +37,7 @@ During EDA we were able to create hypotesis on variables like gender, Age, Occup
 
 My particular contribution was to create pre modelling techniques and feature engineering because based on the priliminary EDA I was able to find that there were 91.92% of the customer base that did not having issue in repaying the loan. On further investigation I was able to find that this is due to class imbalance were 282,686 customers had the binary flag corresponding to no issues to repay while 8.07% (24,825) customer base had issues paying back the loan. This issue was dealt by balancing out the classes before create our models. I was also able to create a random forest model that was able to give us an accuracy score of 0.68. I was able to support my team with debugging any code chunk wherever required. </br>
 
-Apart from this the group was able to create 2 more models of Logistic Regression and XGBoost where income , occupation type andn loan type were the top predictors. </br>
+Apart from this the group was able to create 2 more models of Logistic Regression and XGBoost where income , occupation type and loan type were the top predictors. </br>
 
 Since employment and income are top predictors the business should concentrate on lending loans based on different interest rate range for these 2 criteria. </br>
 
