@@ -30,7 +30,7 @@ dplyr, readr, tidyverse, ggplot2 </br>
 To run the .ipynb file the following libraries are required to be installed through either 'conda intall library name' or 'pip intall library name' : </br>
 warnings, numpy, pandas, matplotlib.pyplot, seaborn, sklearn.model_selection, sklearn.preprocessing, xgboost, sklearn.model_selection, sklearn.linear_model, sklearn.ensemble </br>
 
-Application Train dataset had information of customer's credit application. There is an important column called TARGET that is a binary flag which says 0 or 1 based on if the customers have issues paying back the loan or not.
+Application Train dataset had information of customer's credit application. There is an important column called TARGET that is a binary flag which says 0 or 1 based on if the customers have issues paying back the loan or not. </br>
 
 While data cleaning , We incorporated null value treatment for categorical columns and numerical columns separately. The methodologies used were Mode imputation for object columns because here we had the count of occurances in each column, median imputation for numeric columns because imputation of mean can cause skewing when an outlier is present. For the values that could not be substitued we have eliminated the columns.
 During EDA we were able to create hypotesis on variables like gender, Age, Occupation type and other univariate and multi variate analysis on the given dataset. </br>
@@ -41,14 +41,10 @@ Apart from this the group was able to create 2 more models of Logistic Regressio
 
 Since employment and income are top predictors the business should concentrate on lending loans based on different interest rate range for these 2 criteria. </br>
 
-
-
-
-
 ### Challenges
 
-
-
-
+One of the challenges was the dataset cleaning for a huge dataset which had to be dealt with column elimination for most of them and thus impacting KPI selection. Since a lot of categorical variables were present , identifying individual columns for one hot encoding was a challenge. This was crucial as this was the input for building models.
 
 ### Learnings
+
+I had both technical and collaborative learning through this project. I had an opportunity to explore both R and Python in the same datasets and was a good practise to brush up my coding skills. I was able to learn to collaborate and brain storm ideas with my team which was a very good interpersonal skill development in the project.
